@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:expense_tracker/screens/home/views/main_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +10,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
         child: BottomNavigationBar(
@@ -40,6 +40,7 @@ class HomeScreen extends StatelessWidget {
                 ], transform: const GradientRotation(pi / 4))),
             child: const Icon(CupertinoIcons.add)),
       ),
+      body: const MainScreen(),
     );
   }
 }
