@@ -71,7 +71,14 @@ class MainScreen extends StatelessWidget {
                     Theme.of(context).colorScheme.secondary,
                     Theme.of(context).colorScheme.tertiary,
                   ], transform: const GradientRotation(pi / 4)),
-                  borderRadius: BorderRadius.circular(25)),
+                  borderRadius: BorderRadius.circular(25),
+                  boxShadow: [
+                    BoxShadow(
+                        blurRadius: 2,
+                        spreadRadius: 0,
+                        color: Colors.grey.shade400,
+                        offset: const Offset(5, 5))
+                  ]),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -181,6 +188,108 @@ class MainScreen extends StatelessWidget {
                   )
                 ],
               ),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Transactions',
+                    style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).colorScheme.onBackground,
+                        fontWeight: FontWeight.bold)),
+                GestureDetector(
+                  onTap: () {},
+                  child: Text(
+                    'View All',
+                    style: TextStyle(
+                        fontSize: 14,
+                        color: Theme.of(context).colorScheme.outline,
+                        fontWeight: FontWeight.w400),
+                  ),
+                )
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Expanded(
+              child: ListView.builder(
+                  itemCount: 6,
+                  itemBuilder: (context, int i) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 16.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Container(
+                                        width: 50,
+                                        height: 50,
+                                        decoration: BoxDecoration(
+                                            color: Colors.yellow[700],
+                                            shape: BoxShape.circle),
+                                      ),
+                                      const Icon(
+                                        Icons.food_bank,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    width: 12,
+                                  ),
+                                  Text(
+                                    'Food',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Text(
+                                    '-\$45.00',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .onBackground,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Text(
+                                    'Today',
+                                    style: TextStyle(
+                                        fontSize: 14,
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .outline,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
             )
           ],
         ),
