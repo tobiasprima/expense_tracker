@@ -1,4 +1,4 @@
-import 'package:fl_chart/fl_chart.dart';
+import 'package:expense_tracker/screens/stats/chart.dart';
 import 'package:flutter/material.dart';
 
 class StatScreen extends StatelessWidget {
@@ -20,10 +20,15 @@ class StatScreen extends StatelessWidget {
               height: 20,
             ),
             Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.width,
-              child: BarChart(BarChartData()),
-            )
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(12)),
+                child: const Padding(
+                  padding: EdgeInsets.fromLTRB(12, 20, 12, 12),
+                  child: MyChart(),
+                ))
           ],
         ),
       ),
