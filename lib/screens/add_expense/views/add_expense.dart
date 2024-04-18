@@ -65,33 +65,7 @@ class _AddExpenseState extends State<AddExpense> {
               ),
               TextFormField(
                 readOnly: true,
-                onTap: () {
-                  showDialog(
-                      context: context,
-                      builder: (ctx) {
-                        return AlertDialog(
-                          content: Column(
-                            children: [
-                              TextFormField(
-                                textAlignVertical: TextAlignVertical.center,
-                                readOnly: true,
-                                decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    prefixIcon: const Icon(
-                                        FontAwesomeIcons.clock,
-                                        size: 16,
-                                        color: Colors.grey),
-                                    hintText: 'Name',
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(12),
-                                        borderSide: BorderSide.none)),
-                              )
-                            ],
-                          ),
-                        );
-                      });
-                },
+                onTap: () {},
                 controller: categoryController,
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
@@ -103,7 +77,61 @@ class _AddExpenseState extends State<AddExpense> {
                     color: Colors.grey,
                   ),
                   suffixIcon: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (ctx) {
+                            return AlertDialog(
+                              title: const Text(
+                                'Create a Category',
+                              ),
+                              content: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  TextFormField(
+                                    textAlignVertical: TextAlignVertical.center,
+                                    decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        hintText: 'Name',
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            borderSide: BorderSide.none)),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  TextFormField(
+                                    textAlignVertical: TextAlignVertical.center,
+                                    decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        hintText: 'Icon',
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            borderSide: BorderSide.none)),
+                                  ),
+                                  const SizedBox(
+                                    height: 16,
+                                  ),
+                                  TextFormField(
+                                    textAlignVertical: TextAlignVertical.center,
+                                    decoration: InputDecoration(
+                                        filled: true,
+                                        fillColor: Colors.white,
+                                        hintText: 'Color',
+                                        border: OutlineInputBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            borderSide: BorderSide.none)),
+                                  )
+                                ],
+                              ),
+                            );
+                          });
+                    },
                     icon: Icon(
                       FontAwesomeIcons.plus,
                       size: 16,
