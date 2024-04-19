@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 
@@ -27,6 +28,7 @@ class _AddExpenseState extends State<AddExpense> {
   ];
 
   String iconSelected = '';
+  Color categoryColor = Colors.white;
 
   @override
   void initState() {
@@ -219,16 +221,96 @@ class _AddExpenseState extends State<AddExpense> {
                                           height: 16,
                                         ),
                                         TextFormField(
+                                          onTap: () {
+                                            showDialog(
+                                                context: context,
+                                                builder: (ctx) {
+                                                  return AlertDialog(
+                                                    content:
+                                                        SingleChildScrollView(
+                                                      child: Column(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        children: [
+                                                          ColorPicker(
+                                                            onColorChanged:
+                                                                (value) {
+                                                              setState(() {
+                                                                categoryColor =
+                                                                    value;
+                                                              });
+                                                            },
+                                                            pickerColor:
+                                                                Colors.blue,
+                                                          ),
+                                                          SizedBox(
+                                                            width:
+                                                                double.infinity,
+                                                            height: 50,
+                                                            child: TextButton(
+                                                              onPressed: () {
+                                                                Navigator.pop(
+                                                                    ctx);
+                                                              },
+                                                              style: TextButton.styleFrom(
+                                                                  backgroundColor:
+                                                                      Colors
+                                                                          .black,
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              12))),
+                                                              child: const Text(
+                                                                'Save',
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        22,
+                                                                    color: Colors
+                                                                        .white),
+                                                              ),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  );
+                                                });
+                                          },
+                                          readOnly: true,
                                           textAlignVertical:
                                               TextAlignVertical.center,
                                           decoration: InputDecoration(
                                               filled: true,
-                                              fillColor: Colors.white,
+                                              fillColor: categoryColor,
                                               hintText: 'Color',
                                               border: OutlineInputBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(12),
                                                   borderSide: BorderSide.none)),
+                                        ),
+                                        const SizedBox(
+                                          height: 16,
+                                        ),
+                                        SizedBox(
+                                          width: double.infinity,
+                                          height: kToolbarHeight,
+                                          child: TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            style: TextButton.styleFrom(
+                                                backgroundColor: Colors.black,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12))),
+                                            child: const Text(
+                                              'Save',
+                                              style: TextStyle(
+                                                  fontSize: 22,
+                                                  color: Colors.white),
+                                            ),
+                                          ),
                                         )
                                       ],
                                     ),
