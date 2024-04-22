@@ -1,3 +1,4 @@
+import 'package:expense_repository/expense_repository.dart';
 import 'package:expense_tracker/screens/add_expense/views/category_creation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,10 +19,12 @@ class _AddExpenseState extends State<AddExpense> {
   TextEditingController categoryController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   DateTime selectedDate = DateTime.now();
+  late Expense expense;
 
   @override
   void initState() {
     dateController.text = DateFormat('dd/MM/yy').format(DateTime.now());
+    expense = Expense.empty;
     super.initState();
   }
 
