@@ -81,12 +81,19 @@ class _AddExpenseState extends State<AddExpense> {
                       textAlignVertical: TextAlignVertical.center,
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: Colors.white,
-                        prefixIcon: const Icon(
-                          FontAwesomeIcons.list,
-                          size: 16,
-                          color: Colors.grey,
-                        ),
+                        fillColor: expense.category == Category.empty
+                            ? Colors.white
+                            : Color(expense.category.color),
+                        prefixIcon: expense.category == Category.empty
+                            ? const Icon(
+                                FontAwesomeIcons.list,
+                                size: 16,
+                                color: Colors.grey,
+                              )
+                            : Image.asset(
+                                'assets/${expense.category.icon}.png',
+                                scale: 2,
+                              ),
                         suffixIcon: IconButton(
                           onPressed: () async {
                             var newCategory =
@@ -121,6 +128,13 @@ class _AddExpenseState extends State<AddExpense> {
                             itemBuilder: (context, int i) {
                               return Card(
                                   child: ListTile(
+                                onTap: () {
+                                  setState(() {
+                                    expense.category = state.categories[i];
+                                    categoryController.text =
+                                        expense.category.name;
+                                  });
+                                },
                                 leading: Image.asset(
                                     'assets/${state.categories[i].icon}.png',
                                     scale: 2),
@@ -143,7 +157,7 @@ class _AddExpenseState extends State<AddExpense> {
                       onTap: () async {
                         DateTime? newDate = await showDatePicker(
                             context: context,
-                            initialDate: selectedDate,
+                            initialDate: expense.date,
                             firstDate: DateTime.now(),
                             lastDate:
                                 DateTime.now().add(const Duration(days: 365)));
@@ -152,7 +166,7 @@ class _AddExpenseState extends State<AddExpense> {
                           setState(() {
                             dateController.text =
                                 DateFormat('dd/MM/yyyy').format(newDate);
-                            selectedDate = newDate;
+                            expense.date = newDate;
                           });
                         }
                         ;
