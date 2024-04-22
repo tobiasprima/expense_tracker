@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:uuid/uuid.dart';
 
-getCategoryCreation(BuildContext context) {
+Future getCategoryCreation(BuildContext context) {
   List<String> myCategoriesIcons = [
     'entertainment',
     'food',
@@ -27,13 +27,15 @@ getCategoryCreation(BuildContext context) {
         TextEditingController categoryIconController = TextEditingController();
         TextEditingController categoryColorController = TextEditingController();
         bool isLoading = false;
+        Category category = Category.empty;
+
         return BlocProvider.value(
           value: context.read<CreateCategoryBloc>(),
           child: StatefulBuilder(builder: (ctx, setState) {
             return BlocListener<CreateCategoryBloc, CreateCategoryState>(
               listener: (context, state) {
                 if (state is CreateCategorySuccess) {
-                  Navigator.pop(ctx);
+                  Navigator.pop(ctx, category);
                 } else if (state is CreateCategoryLoading) {
                   setState(() {
                     isLoading = true;
@@ -210,13 +212,12 @@ getCategoryCreation(BuildContext context) {
                             : TextButton(
                                 onPressed: () {
                                   setState(() {
-                                    isLoading = true;
+                                    category.categoryId = const Uuid().v1();
+                                    category.name = categoryNameController.text;
+                                    category.icon = iconSelected;
+                                    category.color = categoryColor.value;
                                   });
-                                  Category category = Category.empty;
-                                  category.categoryId = const Uuid().v1();
-                                  category.name = categoryNameController.text;
-                                  category.icon = iconSelected;
-                                  category.color = categoryColor.toString();
+
                                   context
                                       .read<CreateCategoryBloc>()
                                       .add(CreateCategory(category));
