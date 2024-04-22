@@ -1,7 +1,10 @@
 import 'package:expense_tracker/screens/add_expense/views/category_creation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+
+import '../blocs/get_categoriesbloc/get_categories_bloc.dart';
 
 class AddExpense extends StatefulWidget {
   const AddExpense({super.key});
@@ -103,18 +106,30 @@ class _AddExpenseState extends State<AddExpense> {
                         BorderRadius.vertical(bottom: Radius.circular(12))),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: ListView.builder(
-                    itemBuilder: (context, int i) {
-                      return Card(
-                          child: ListTile(
-                        leading: Image.asset('assets/food.png', scale: 2),
-                        title: Text('Food'),
-                        tileColor: Colors.red,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
-                      ));
+                  child: BlocBuilder<GetCategoriesBloc, GetCategoriesState>(
+                    builder: (context, state) {
+                      if (state is GetCategoriesSuccess) {
+                        return ListView.builder(
+                          itemBuilder: (context, int i) {
+                            return Card(
+                                child: ListTile(
+                              leading: Image.asset(
+                                  'assets/${state.categories[i].icon}.png',
+                                  scale: 2),
+                              title: const Text('Food'),
+                              tileColor: Colors.red,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8)),
+                            ));
+                          },
+                          itemCount: state.categories.length,
+                        );
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
                     },
-                    itemCount: 3,
                   ),
                 ),
               ),
