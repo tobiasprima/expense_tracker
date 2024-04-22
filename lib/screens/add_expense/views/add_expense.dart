@@ -196,7 +196,12 @@ class _AddExpenseState extends State<AddExpense> {
                                 backgroundColor: Colors.black,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12))),
-                            onPressed: () {},
+                            onPressed: () {
+                              setState(() {
+                                expense.amount =
+                                    int.parse(expenseController.text);
+                              });
+                            },
                             child: const Text(
                               'Save',
                               style:
