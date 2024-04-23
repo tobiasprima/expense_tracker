@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:expense_repository/expense_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class MainScreen extends StatelessWidget {
   final List<Expense> expenses;
@@ -270,7 +271,7 @@ class MainScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    expenses[i].amount.toString(),
+                                    '\$${expenses[i].amount.toString()}.00',
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Theme.of(context)
@@ -279,7 +280,8 @@ class MainScreen extends StatelessWidget {
                                         fontWeight: FontWeight.w400),
                                   ),
                                   Text(
-                                    'Today',
+                                    DateFormat('dd/MM/yyy')
+                                        .format(expenses[i].date),
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Theme.of(context)

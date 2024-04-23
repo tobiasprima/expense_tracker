@@ -56,8 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                Navigator.push(
+              onPressed: () async {
+                var newExpense = await Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) => MultiBlocProvider(
@@ -78,6 +78,12 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                               child: const AddExpense(),
                             )));
+
+                if (newExpense != null) {
+                  setState(() {
+                    state.expenses.insert(0, newExpense);
+                  });
+                }
               },
               shape: const CircleBorder(),
               child: Container(
