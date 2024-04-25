@@ -80,7 +80,7 @@ class AddBalance extends StatelessWidget {
                     return Card(
                       child: ListTile(
                         onTap: () {},
-                        leading: Icon(
+                        leading: const Icon(
                           FontAwesomeIcons.plus,
                           size: 12,
                         ),
