@@ -21,9 +21,6 @@ jobs:
       - name: Check Flutter Version
         run: flutter --version
 
-      - name: Clear Pub Cache
-        run: flutter pub cache clean
-
       - name: Install dependencies
         run: flutter pub get
 
