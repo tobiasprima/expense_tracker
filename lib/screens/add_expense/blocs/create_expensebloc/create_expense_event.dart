@@ -12,5 +12,6 @@ class CreateExpense extends CreateExpenseEvent {
 
   const CreateExpense(this.expense);
 
+  @override
   List<Object> get props => [expense];
 }

@@ -7,7 +7,7 @@ part 'create_income_category_state.dart';
 
 class CreateIncomeCategoryBloc
     extends Bloc<CreateIncomeCategoryEvent, CreateIncomeCategoryState> {
-  final IncomeRepository incomeRepository;
+  IncomeRepository incomeRepository;
   CreateIncomeCategoryBloc(this.incomeRepository)
       : super(CreateIncomeCategoryInitial()) {
     on<CreateIncomeCategory>((event, emit) async {
