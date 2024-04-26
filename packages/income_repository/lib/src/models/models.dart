@@ -1,2 +1,2 @@
 export 'income.dart';
-export 'incomeCategory.dart';
+export 'income_category.dart';
