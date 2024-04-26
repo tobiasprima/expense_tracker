@@ -33,4 +33,28 @@ class FirebaseIncomeRepo implements IncomeRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<void> createIncome(Income income) async {
+    try {
+      await incomeCollection
+          .doc(income.incomeId)
+          .set(income.toEntity().toDocument());
+    } catch (e) {
+      log(e.toString());
+      rethrow;
+    }
+
+    @override
+    Future<List<Income>> getIncomes() async {
+      try {
+        return await incomeCollection.get().then((value) => value.docs
+            .map((e) => Income.fromEntity(IncomeEntity.fromDocument(e.data())))
+            .toList());
+      } catch (e) {
+        log(e.toString());
+        rethrow;
+      }
+    }
+  }
 }
