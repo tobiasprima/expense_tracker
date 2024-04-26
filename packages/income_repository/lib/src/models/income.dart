@@ -15,8 +15,26 @@ class Income {
 
   static final empty = Income(
     incomeId: '',
-category: IncomeCategory.empty,
-date: DateTime.now(),
-amount: 0,
-  )
+    category: IncomeCategory.empty,
+    date: DateTime.now(),
+    amount: 0,
+  );
+
+  IncomeEntity toEntity() {
+    return IncomeEntity(
+      incomeId: incomeId,
+      category: category,
+      date: date,
+      amount: amount,
+    );
+  }
+
+  static Income fromEntity(IncomeEntity entity) {
+    return Income(
+      incomeId: entity.incomeId,
+      category: entity.category,
+      date: entity.date,
+      amount: entity.amount,
+    );
+  }
 }
