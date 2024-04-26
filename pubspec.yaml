@@ -25,6 +25,9 @@ dependencies:
   expense_repository:
     path: packages/expense_repository
 
+  income_repository:
+    path: packages/income_repository
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
