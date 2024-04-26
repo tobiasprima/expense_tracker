@@ -14,10 +14,10 @@ final class GetIncomeCategoriesFailure extends GetIncomeCategoriesState {}
 final class GetIncomeCategoriesLoading extends GetIncomeCategoriesState {}
 
 final class GetIncomeCategoriesSuccess extends GetIncomeCategoriesState {
-  final List<IncomeCategory> categories;
+  final List<IncomeCategory> incomeCategories;
 
-  const GetIncomeCategoriesSuccess(this.categories);
+  const GetIncomeCategoriesSuccess(this.incomeCategories);
 
   @override
-  List<Object> get props => [categories];
+  List<Object> get props => [incomeCategories];
 }

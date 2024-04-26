@@ -13,8 +13,9 @@ class GetIncomeCategoriesBloc
     on<GetIncomeCategories>((event, emit) async {
       emit(GetIncomeCategoriesLoading());
       try {
-        List<IncomeCategory> categories =
+        List<IncomeCategory> incomeCategories =
             await incomeRepository.getIncomeCategory();
+        emit(GetIncomeCategoriesSuccess(incomeCategories));
       } catch (e) {
         emit(GetIncomeCategoriesFailure());
       }

@@ -12,10 +12,15 @@ import 'package:intl/intl.dart';
 
 import '../../add_income/views/add_income.dart';
 
-class MainScreen extends StatelessWidget {
+class MainScreen extends StatefulWidget {
   final List<Expense> expenses;
   const MainScreen(this.expenses, {super.key});
 
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -74,7 +79,7 @@ class MainScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
+                var newIncome = Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (BuildContext context) =>
@@ -250,7 +255,7 @@ class MainScreen extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: expenses.length,
+                  itemCount: widget.expenses.length,
                   itemBuilder: (context, int i) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
@@ -272,12 +277,12 @@ class MainScreen extends StatelessWidget {
                                         width: 50,
                                         height: 50,
                                         decoration: BoxDecoration(
-                                            color: Color(
-                                                expenses[i].category.color),
+                                            color: Color(widget
+                                                .expenses[i].category.color),
                                             shape: BoxShape.circle),
                                       ),
                                       Image.asset(
-                                        'assets/${expenses[i].category.icon}.png',
+                                        'assets/${widget.expenses[i].category.icon}.png',
                                         scale: 2,
                                         color: Colors.white,
                                       )
@@ -287,7 +292,7 @@ class MainScreen extends StatelessWidget {
                                     width: 12,
                                   ),
                                   Text(
-                                    expenses[i].category.name,
+                                    widget.expenses[i].category.name,
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Theme.of(context)
@@ -301,7 +306,7 @@ class MainScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    '\$${expenses[i].amount.toString()}.00',
+                                    '\$${widget.expenses[i].amount.toString()}.00',
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Theme.of(context)
@@ -311,7 +316,7 @@ class MainScreen extends StatelessWidget {
                                   ),
                                   Text(
                                     DateFormat('dd/MM/yyy')
-                                        .format(expenses[i].date),
+                                        .format(widget.expenses[i].date),
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Theme.of(context)
