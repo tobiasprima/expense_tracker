@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../add_balance/views/add_balance.dart';
+import '../../add_income/views/add_income.dart';
 
 class MainScreen extends StatelessWidget {
   final List<Expense> expenses;
