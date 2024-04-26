@@ -69,10 +69,8 @@ class MainScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const AddBalance()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const AddIncome()));
               },
               child: Container(
                 width: MediaQuery.of(context).size.width,

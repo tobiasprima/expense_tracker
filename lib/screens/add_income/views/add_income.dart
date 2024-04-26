@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class AddBalance extends StatelessWidget {
-  const AddBalance({super.key});
+class AddIncome extends StatelessWidget {
+  const AddIncome({super.key});
 
   @override
   Widget build(BuildContext context) {
