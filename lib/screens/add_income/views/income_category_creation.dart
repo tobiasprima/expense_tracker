@@ -18,6 +18,7 @@ Future getIncomeCategoryCreation(BuildContext context) {
   ];
 
   return showDialog(
+      barrierDismissible: true,
       context: context,
       builder: (ctx) {
         bool isExpanded = false;

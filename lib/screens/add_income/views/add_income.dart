@@ -107,10 +107,12 @@ class _AddIncomeState extends State<AddIncome> {
                               onPressed: () async {
                                 var newIncomeCategory =
                                     await getIncomeCategoryCreation(context);
-                                setState(() {
-                                  state.incomeCategories
-                                      .insert(0, newIncomeCategory);
-                                });
+                                if (newIncomeCategory != null) {
+                                  setState(() {
+                                    state.incomeCategories
+                                        .insert(0, newIncomeCategory);
+                                  });
+                                }
                               },
                               icon: const Icon(
                                 FontAwesomeIcons.plus,

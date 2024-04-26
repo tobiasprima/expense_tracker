@@ -19,6 +19,7 @@ Future getCategoryCreation(BuildContext context) {
 
   return showDialog(
       context: context,
+      barrierDismissible: true,
       builder: (ctx) {
         bool isExpanded = false;
         String iconSelected = '';
