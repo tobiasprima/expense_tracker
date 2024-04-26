@@ -1,8 +1,13 @@
 import 'dart:math';
 
 import 'package:expense_repository/expense_repository.dart';
+import 'package:expense_tracker/screens/add_income/blocs/create_income_categorybloc/create_income_category_bloc.dart';
+import 'package:expense_tracker/screens/add_income/blocs/create_incomebloc/create_income_bloc.dart';
+import 'package:expense_tracker/screens/add_income/blocs/get_income_categoriesbloc/get_income_categories_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:income_repository/income_repository.dart';
 import 'package:intl/intl.dart';
 
 import '../../add_income/views/add_income.dart';
@@ -69,8 +74,25 @@ class MainScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const AddIncome()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            MultiBlocProvider(providers: [
+                              BlocProvider(
+                                create: (context) => CreateIncomeCategoryBloc(
+                                    FirebaseIncomeRepo()),
+                              ),
+                              BlocProvider(
+                                create: (context) => GetIncomeCategoriesBloc(
+                                    FirebaseIncomeRepo())
+                                  ..add(GetIncomeCategories()),
+                              ),
+                              BlocProvider(
+                                create: (context) =>
+                                    CreateIncomeBloc(FirebaseIncomeRepo()),
+                              ),
+                            ], child: const AddIncome())));
               },
               child: Container(
                 width: MediaQuery.of(context).size.width,

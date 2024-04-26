@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ], transform: const GradientRotation(pi / 4))),
                   child: const Icon(CupertinoIcons.add)),
             ),
-            body: index == 0 ? MainScreen(state.expenses) : StatScreen(),
+            body: index == 0 ? MainScreen(state.expenses) : const StatScreen(),
           );
         } else {
           return const Scaffold(
