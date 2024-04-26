@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:income_repository/income_repository.dart';
 
-class AddIncome extends StatelessWidget {
+class AddIncome extends StatefulWidget {
   const AddIncome({super.key});
 
+  @override
+  State<AddIncome> createState() => _AddIncomeState();
+}
+
+class _AddIncomeState extends State<AddIncome> {
+  TextEditingController incomeController = TextEditingController();
+  TextEditingController incomeCategoryController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+  DateTime selectedDate = DateTime.now();
+  late Income income;
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
