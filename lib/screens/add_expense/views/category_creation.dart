@@ -32,6 +32,7 @@ Future<dynamic> getCategoryCreation(BuildContext context) {
         bool isLoading = false;
         Category category = Category.empty;
 
+        bool colorNotTouched = true;
         bool validationAttempted = false;
 
         return BlocProvider.value(
@@ -182,6 +183,7 @@ Future<dynamic> getCategoryCreation(BuildContext context) {
                                             onColorChanged: (value) {
                                               setState(() {
                                                 categoryColor = value;
+                                                colorNotTouched = false;
                                               });
                                             },
                                             pickerColor: Colors.blue,
@@ -222,12 +224,12 @@ Future<dynamic> getCategoryCreation(BuildContext context) {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
                                   borderSide: BorderSide.none),
-                              errorText: validationAttempted &&
-                                      categoryColor == Colors.white
+                              errorText: validationAttempted && colorNotTouched
                                   ? 'Please choose a color'
                                   : null),
                           validator: (value) {
-                            if (categoryColor == Colors.white) {
+                            if (categoryColor == Colors.white &&
+                                colorNotTouched) {
                               return 'Please choose a color';
                             }
                             return null;

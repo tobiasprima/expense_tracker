@@ -32,6 +32,7 @@ Future getIncomeCategoryCreation(BuildContext context) {
         bool isLoading = false;
         IncomeCategory category = IncomeCategory.empty;
 
+        bool colorNotTouched = true;
         bool validationAttempted = false;
 
         return BlocProvider.value(
@@ -180,6 +181,7 @@ Future getIncomeCategoryCreation(BuildContext context) {
                                             onColorChanged: (value) {
                                               setState(() {
                                                 categoryColor = value;
+                                                colorNotTouched = false;
                                               });
                                             },
                                             pickerColor: Colors.blue,
@@ -220,13 +222,12 @@ Future getIncomeCategoryCreation(BuildContext context) {
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
                                   borderSide: BorderSide.none),
-                              errorText: validationAttempted &&
-                                      categoryColor == Colors.white
+                              errorText: validationAttempted && colorNotTouched
                                   ? 'Please choose a color'
                                   : null),
                           validator: (value) {
-                            if (value == null ||
-                                categoryColor == Colors.white) {
+                            if (categoryColor == Colors.white &&
+                                colorNotTouched) {
                               return 'Please choose a color';
                             }
                             return null;
