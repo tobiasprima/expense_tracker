@@ -1,12 +1,12 @@
-import 'package:expense_repository/expense_repository.dart';
-import 'package:expense_tracker/screens/add_expense/blocs/create_categorybloc/create_category_bloc.dart';
+import 'package:expense_tracker/screens/add_income/blocs/create_income_categorybloc/create_income_category_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:income_repository/income_repository.dart';
 import 'package:uuid/uuid.dart';
 
-Future getCategoryCreation(BuildContext context) {
+Future getIncomeCategoryCreation(BuildContext context) {
   List<String> myCategoriesIcons = [
     'entertainment',
     'food',
@@ -18,8 +18,8 @@ Future getCategoryCreation(BuildContext context) {
   ];
 
   return showDialog(
-      context: context,
       barrierDismissible: true,
+      context: context,
       builder: (ctx) {
         bool isExpanded = false;
         String iconSelected = '';
@@ -28,16 +28,17 @@ Future getCategoryCreation(BuildContext context) {
         TextEditingController categoryIconController = TextEditingController();
         TextEditingController categoryColorController = TextEditingController();
         bool isLoading = false;
-        Category category = Category.empty;
+        IncomeCategory category = IncomeCategory.empty;
 
         return BlocProvider.value(
-          value: context.read<CreateCategoryBloc>(),
+          value: context.read<CreateIncomeCategoryBloc>(),
           child: StatefulBuilder(builder: (ctx, setState) {
-            return BlocListener<CreateCategoryBloc, CreateCategoryState>(
+            return BlocListener<CreateIncomeCategoryBloc,
+                CreateIncomeCategoryState>(
               listener: (context, state) {
-                if (state is CreateCategorySuccess) {
+                if (state is CreateIncomeCategorySuccess) {
                   Navigator.pop(ctx, category);
-                } else if (state is CreateCategoryLoading) {
+                } else if (state is CreateIncomeCategoryLoading) {
                   setState(() {
                     isLoading = true;
                   });
@@ -213,15 +214,16 @@ Future getCategoryCreation(BuildContext context) {
                             : TextButton(
                                 onPressed: () {
                                   setState(() {
-                                    category.categoryId = const Uuid().v1();
+                                    category.incomeCategoryId =
+                                        const Uuid().v1();
                                     category.name = categoryNameController.text;
                                     category.icon = iconSelected;
                                     category.color = categoryColor.value;
                                   });
 
                                   context
-                                      .read<CreateCategoryBloc>()
-                                      .add(CreateCategory(category));
+                                      .read<CreateIncomeCategoryBloc>()
+                                      .add(CreateIncomeCategory(category));
                                 },
                                 style: TextButton.styleFrom(
                                     backgroundColor: Colors.black,

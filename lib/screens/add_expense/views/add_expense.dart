@@ -112,9 +112,11 @@ class _AddExpenseState extends State<AddExpense> {
                             onPressed: () async {
                               var newCategory =
                                   await getCategoryCreation(context);
-                              setState(() {
-                                state.categories.insert(0, newCategory);
-                              });
+                              if (newCategory != null) {
+                                setState(() {
+                                  state.categories.insert(0, newCategory);
+                                });
+                              }
                             },
                             icon: const Icon(
                               FontAwesomeIcons.plus,

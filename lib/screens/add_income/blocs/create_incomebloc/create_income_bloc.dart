@@ -12,6 +12,7 @@ class CreateIncomeBloc extends Bloc<CreateIncomeEvent, CreateIncomeState> {
       emit(CreateIncomeLoading());
       try {
         await incomeRepository.createIncome(event.income);
+        emit(CreateIncomeSuccess());
       } catch (e) {
         emit(CreateIncomeFailure());
       }

@@ -1,16 +1,25 @@
 import 'dart:math';
 
-import 'package:expense_repository/expense_repository.dart';
+import 'package:expense_tracker/screens/add_income/blocs/create_income_categorybloc/create_income_category_bloc.dart';
+import 'package:expense_tracker/screens/add_income/blocs/create_incomebloc/create_income_bloc.dart';
+import 'package:expense_tracker/screens/add_income/blocs/get_income_categoriesbloc/get_income_categories_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:income_repository/income_repository.dart';
 import 'package:intl/intl.dart';
 
 import '../../add_income/views/add_income.dart';
 
-class MainScreen extends StatelessWidget {
-  final List<Expense> expenses;
-  const MainScreen(this.expenses, {super.key});
+class MainScreen extends StatefulWidget {
+  final List<dynamic> transactions;
+  const MainScreen(this.transactions, {super.key});
 
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -69,8 +78,25 @@ class MainScreen extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const AddIncome()));
+                var newIncome = Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            MultiBlocProvider(providers: [
+                              BlocProvider(
+                                create: (context) => CreateIncomeCategoryBloc(
+                                    FirebaseIncomeRepo()),
+                              ),
+                              BlocProvider(
+                                create: (context) => GetIncomeCategoriesBloc(
+                                    FirebaseIncomeRepo())
+                                  ..add(GetIncomeCategories()),
+                              ),
+                              BlocProvider(
+                                create: (context) =>
+                                    CreateIncomeBloc(FirebaseIncomeRepo()),
+                              ),
+                            ], child: const AddIncome())));
               },
               child: Container(
                 width: MediaQuery.of(context).size.width,
@@ -228,7 +254,7 @@ class MainScreen extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: expenses.length,
+                  itemCount: widget.transactions.length,
                   itemBuilder: (context, int i) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
@@ -250,12 +276,12 @@ class MainScreen extends StatelessWidget {
                                         width: 50,
                                         height: 50,
                                         decoration: BoxDecoration(
-                                            color: Color(
-                                                expenses[i].category.color),
+                                            color: Color(widget.transactions[i]
+                                                .category.color),
                                             shape: BoxShape.circle),
                                       ),
                                       Image.asset(
-                                        'assets/${expenses[i].category.icon}.png',
+                                        'assets/${widget.transactions[i].category.icon}.png',
                                         scale: 2,
                                         color: Colors.white,
                                       )
@@ -265,7 +291,7 @@ class MainScreen extends StatelessWidget {
                                     width: 12,
                                   ),
                                   Text(
-                                    expenses[i].category.name,
+                                    widget.transactions[i].category.name,
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Theme.of(context)
@@ -279,7 +305,7 @@ class MainScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    '\$${expenses[i].amount.toString()}.00',
+                                    '\$${widget.transactions[i].amount.toString()}.00',
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Theme.of(context)
@@ -289,7 +315,7 @@ class MainScreen extends StatelessWidget {
                                   ),
                                   Text(
                                     DateFormat('dd/MM/yyy')
-                                        .format(expenses[i].date),
+                                        .format(widget.transactions[i].date),
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Theme.of(context)
