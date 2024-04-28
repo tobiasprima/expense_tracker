@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:expense_repository/expense_repository.dart';
 import 'package:expense_tracker/screens/add_income/blocs/create_income_categorybloc/create_income_category_bloc.dart';
 import 'package:expense_tracker/screens/add_income/blocs/create_incomebloc/create_income_bloc.dart';
 import 'package:expense_tracker/screens/add_income/blocs/get_income_categoriesbloc/get_income_categories_bloc.dart';
@@ -13,8 +12,8 @@ import 'package:intl/intl.dart';
 import '../../add_income/views/add_income.dart';
 
 class MainScreen extends StatefulWidget {
-  final List<Expense> expenses;
-  const MainScreen(this.expenses, {super.key});
+  final List<dynamic> transactions;
+  const MainScreen(this.transactions, {super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -255,7 +254,7 @@ class _MainScreenState extends State<MainScreen> {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: widget.expenses.length,
+                  itemCount: widget.transactions.length,
                   itemBuilder: (context, int i) {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
@@ -277,12 +276,12 @@ class _MainScreenState extends State<MainScreen> {
                                         width: 50,
                                         height: 50,
                                         decoration: BoxDecoration(
-                                            color: Color(widget
-                                                .expenses[i].category.color),
+                                            color: Color(widget.transactions[i]
+                                                .category.color),
                                             shape: BoxShape.circle),
                                       ),
                                       Image.asset(
-                                        'assets/${widget.expenses[i].category.icon}.png',
+                                        'assets/${widget.transactions[i].category.icon}.png',
                                         scale: 2,
                                         color: Colors.white,
                                       )
@@ -292,7 +291,7 @@ class _MainScreenState extends State<MainScreen> {
                                     width: 12,
                                   ),
                                   Text(
-                                    widget.expenses[i].category.name,
+                                    widget.transactions[i].category.name,
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Theme.of(context)
@@ -306,7 +305,7 @@ class _MainScreenState extends State<MainScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    '\$${widget.expenses[i].amount.toString()}.00',
+                                    '\$${widget.transactions[i].amount.toString()}.00',
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Theme.of(context)
@@ -316,7 +315,7 @@ class _MainScreenState extends State<MainScreen> {
                                   ),
                                   Text(
                                     DateFormat('dd/MM/yyy')
-                                        .format(widget.expenses[i].date),
+                                        .format(widget.transactions[i].date),
                                     style: TextStyle(
                                         fontSize: 14,
                                         color: Theme.of(context)

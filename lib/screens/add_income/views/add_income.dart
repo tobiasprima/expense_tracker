@@ -34,6 +34,7 @@ class _AddIncomeState extends State<AddIncome> {
 
   @override
   Widget build(BuildContext context) {
+    income.category = IncomeCategory.empty;
     return BlocListener<CreateIncomeBloc, CreateIncomeState>(
       listener: (context, state) {
         if (state is CreateIncomeSuccess) {
