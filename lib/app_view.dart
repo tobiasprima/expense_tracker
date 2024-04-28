@@ -21,7 +21,8 @@ class MyAppView extends StatelessWidget {
             primary: const Color(0xFF00B2B7),
             secondary: const Color(0xFFE064F7),
             tertiary: const Color(0xFFFF8D6C),
-            outline: Colors.grey),
+            outline: Colors.grey,
+            error: Colors.red),
       ),
       home: MultiBlocProvider(
         providers: [
