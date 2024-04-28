@@ -122,7 +122,8 @@ class _AddIncomeState extends State<AddIncome> {
                                   ),
                                   Text(
                                     'Please select a category',
-                                    style: TextStyle(color: Colors.redAccent),
+                                    style: TextStyle(
+                                        color: Colors.redAccent, fontSize: 12),
                                   ),
                                 ],
                               ),

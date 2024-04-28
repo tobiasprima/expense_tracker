@@ -117,8 +117,16 @@ class _AddExpenseState extends State<AddExpense> {
                           children: [
                             if (validationAttempted &&
                                 categoryController.text.trim().isEmpty)
-                              const Text('Please select a category',
-                                  style: TextStyle(color: Colors.red)),
+                              const Row(
+                                children: [
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Text('Please select a category',
+                                      style: TextStyle(
+                                          color: Colors.red, fontSize: 12)),
+                                ],
+                              ),
                             TextFormField(
                               readOnly: true,
                               onTap: () {},
